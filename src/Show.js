@@ -28,13 +28,33 @@ var ShowInfo = React.createClass({
 })
 
 var Show = React.createClass({
+  getDefaultProps: function() {
+    return {
+      showIndex: 0
+    }
+  },
+  getInitialState: function(){
+    return {
+      showIndex: this.props.showIndex
+    }
+  },
+
+  handleBtnClick: function() {
+    var totalShows = this.props.shows.length
+    this.setState(function(prevState) {
+      return {
+        showIndex: (prevState.showIndex + 1) % totalShows
+      }
+    })
+  },
   render: function() {
-    var show = this.props.show
+    var show = this.props.shows[this.state.showIndex]
     return (
       <div className="text-center">
         <Title showTitle={show.title}/>
         <Poster showPoster={show.poster}/>
         <ShowInfo showPlot={show.plot} showRating={show.imbdRating}/>
+        <button onClick={this.handleBtnClick}>Next Show</button>
       </div>
     )
   }

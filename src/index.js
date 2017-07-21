@@ -4,10 +4,6 @@ var shows = require('./shows.json')
 var Show = require('./Show')
 
 ReactDOM.render(
-  <div>
-    <Show show={shows[0]} />
-    <Show show={shows[1]} />
-    <Show show={shows[2]} />
-  </div>,
+  <Show shows={shows} showIndex={2} />,
   document.getElementById('root')
 )
