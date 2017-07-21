@@ -1,16 +1,14 @@
 var React = require('react')
 var ReactDOM = require('react-dom')
 
-var App = (
-  <ul>
-    <li>Strawberry</li>
-    <li>Banana</li>
-    <li>Pear</li>
-    <li>Apple</li>
-  </ul>
-)
+
+var Component = function() {
+  return (
+    <h1>Hello World</h1>
+  )
+}
 
 ReactDOM.render(
-  App,
+  <Component />,
   document.getElementById('root')
 )
