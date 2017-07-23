@@ -15,20 +15,37 @@ var Employee = function(firstName, lastName) {
 
 }
 
-
 Employee.prototype.getFullName = function() {
   return this.firstName + ' ' + this.lastName
 }
-var sam = new Employee('Sam', 'Williams')
+
+var Engineer = function(firstName,lastName,field){
+  Employee.call(this, firstName, lastName)
+  this.field = field
+}
+
+Engineer.prototype = Object.create(Employee.prototype)
+Engineer.prototype.constructor = Engineer
+
+Engineer.prototype.getDescription = function(){
+  return this.getFullName() + ' is ' + this.field + 'Engineer'
+}
+
+Engineer.greeting = function() { return "say Hi!"}
+
+// console.log(Engineer.greeting())
+
+var sam = new Engineer('Sam', 'Williams', 'Software')
+// console.log(sam)
 // console.log(sam)
 // console.log(sam.getFullName())
-console.log(Employee.prototype === sam.__proto__)
+// console.log(sam.getDescription())
+
 
 
 /* ES6 Class */
 class EmployeeES6 {
   constructor(firstName,lastName) {
-    // console.log('Inside EmployeeES6')
     this.firstName = firstName
     this.lastName = lastName
   }
@@ -38,7 +55,22 @@ class EmployeeES6 {
   }
 }
 
-var sammy = new EmployeeES6('Sammy', 'Winchester')
-// console.log(sammy)
+class EngineerES6 extends EmployeeES6 {
+  constructor(firstName,lastName,field) {
+    super(firstName,lastName)
+    this.field = field
+  }
+  static greeting() {
+    return 'sayHi'
+  }
+  getDescription() {
+    return super.getFullName() + ' is ' + this.field + 'Engineer'
+  }
+}
+
+// EngineerES6.greeting = function() { return "say Hi!"}
+console.log(EngineerES6.greeting())
+var sammy = new EngineerES6()
+console.log(sammy.greeting())
 // console.log(sammy.getFullName())
-console.log(EmployeeES6.prototype === sammy.__proto__)
+// console.log(sammy.getDescription())
